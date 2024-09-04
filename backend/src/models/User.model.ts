@@ -7,6 +7,8 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
+  createJWT(): string;
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 const userSchema = new mongoose.Schema({
