@@ -15,11 +15,11 @@ const register = async (req: Request, res: Response) => {
 };
 
 const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ email });
   if (!user || !(await user.comparePassword(password))) {
-    return res.status(401).json({ error: "Invalid username or password" });
+    return res.status(401).json({ message: "Invalid username or password" });
   }
 
   const token = user.createJWT();

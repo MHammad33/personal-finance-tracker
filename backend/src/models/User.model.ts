@@ -40,7 +40,7 @@ userSchema.set("toJSON", {
 
 userSchema.pre("save", async function () {
   const salt = await bcryptjs.genSalt(10);
-  this.password = await bcryptjs.hash(this.password, config.JWT_SECRET_KEY);
+  this.password = await bcryptjs.hash(this.password, salt);
 });
 
 userSchema.methods.createJWT = function () {
@@ -59,6 +59,8 @@ userSchema.methods.comparePassword = async function (
 ) {
   return bcryptjs.compare(candidatePassword, this.password);
 };
+
+userSchema.index({ email: 1 });
 
 const User = mongoose.model<IUser>("User", userSchema);
 
