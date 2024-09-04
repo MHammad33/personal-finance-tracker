@@ -3,7 +3,7 @@ import { FC } from "react";
 interface LoginPageProps {}
 
 const LoginPage: FC<LoginPageProps> = ({}) => {
-	return <div>LoginPage</div>;
+	return <h1>Login page</h1>;
 };
 
 export default LoginPage;
