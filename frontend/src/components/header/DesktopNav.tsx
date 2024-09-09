@@ -10,10 +10,10 @@ const DesktopNav: FC<DesktopNavProps> = ({ isLoggedIn }) => (
 	<div className="hidden md:flex items-center space-x-2">
 		<div className="flex space-x-4">
 			<Link
-				to="/"
+				to="/dashboard"
 				className="px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
 			>
-				Home
+				Dashboard
 			</Link>
 			<Link
 				to="/about"
@@ -26,12 +26,6 @@ const DesktopNav: FC<DesktopNavProps> = ({ isLoggedIn }) => (
 				className="px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
 			>
 				Transactions
-			</Link>
-			<Link
-				to="/add-transaction"
-				className="block px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-			>
-				Add Transaction
 			</Link>
 		</div>
 		{!isLoggedIn ? (

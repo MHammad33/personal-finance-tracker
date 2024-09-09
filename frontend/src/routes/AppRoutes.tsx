@@ -11,6 +11,7 @@ const Login = lazy(() => import("../pages/LoginPage"));
 const Signup = lazy(() => import("../pages/SignupPage"));
 const About = lazy(() => import("../pages/AboutPage"));
 const Transaction = lazy(() => import("../pages/TransactionPage"));
+const DashboardPage = lazy(() => import("../pages/DashboardPage"));
 
 const routes: RouteObject[] = [
 	{
@@ -22,6 +23,7 @@ const routes: RouteObject[] = [
 			{ path: "signup", element: <Signup /> },
 			{ path: "about", element: <About /> },
 			{ path: "add-transaction", element: <Transaction /> },
+			{ path: "dashboard", element: <DashboardPage /> },
 		],
 	},
 ];
