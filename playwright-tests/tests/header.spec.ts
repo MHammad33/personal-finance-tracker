@@ -49,7 +49,7 @@ test.describe("Header Component", () => {
 		await expect(body).not.toHaveClass(/dark/);
 	});
 
-	test("Logged-out state shows SIgn in and Register links", async ({
+	test("Logged-out state shows Sign in and Register links", async ({
 		page,
 	}) => {
 		await page.goto("http://localhost:5173/");

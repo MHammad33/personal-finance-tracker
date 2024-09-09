@@ -35,8 +35,8 @@ const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
 			<MobileNav isMenuOpen={isMenuOpen} isLoggedIn={isLoggedIn} />
 
 			<div className="hidden md:flex items-center space-x-2">
-				<DarkModeToggle />
 				<DesktopNav isLoggedIn={isLoggedIn} />
+				<DarkModeToggle />
 			</div>
 		</header>
 	);

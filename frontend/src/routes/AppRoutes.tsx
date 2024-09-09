@@ -9,6 +9,7 @@ import {
 const Home = lazy(() => import("../pages/Homepage"));
 const Login = lazy(() => import("../pages/LoginPage"));
 const Signup = lazy(() => import("../pages/SignupPage"));
+const About = lazy(() => import("../pages/AboutPage"));
 
 const routes: RouteObject[] = [
 	{
@@ -18,6 +19,7 @@ const routes: RouteObject[] = [
 			{ path: "", element: <Home /> },
 			{ path: "login", element: <Login /> },
 			{ path: "signup", element: <Signup /> },
+			{ path: "about", element: <About /> },
 		],
 	},
 ];
