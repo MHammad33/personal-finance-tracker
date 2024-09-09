@@ -27,10 +27,10 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen, isLoggedIn }) => (
 			About
 		</Link>
 		<Link
-			to="/expenses"
+			to="/transactions"
 			className="block px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
 		>
-			Expenses
+			Transactions
 		</Link>
 		<Link
 			to="/add-transaction"

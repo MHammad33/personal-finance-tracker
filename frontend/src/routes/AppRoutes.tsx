@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
 		path: "/",
 		element: <Layout />,
 		children: [
-			{ path: "/", element: <Home /> },
+			{ path: "/", element: <Home isLoggedIn={true} /> },
 			{ path: "login", element: <Login /> },
 			{ path: "signup", element: <Signup /> },
 			{ path: "about", element: <About /> },
