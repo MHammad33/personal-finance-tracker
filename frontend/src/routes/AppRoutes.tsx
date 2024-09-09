@@ -1,10 +1,10 @@
+import { Layout } from "@/components";
 import React, { lazy, Suspense } from "react";
 import {
 	createBrowserRouter,
 	RouterProvider,
 	RouteObject,
 } from "react-router-dom";
-import { Layout } from "../components";
 
 const Home = lazy(() => import("../pages/Homepage"));
 const Login = lazy(() => import("../pages/LoginPage"));
