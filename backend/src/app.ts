@@ -11,6 +11,7 @@ const app: Application = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(middleware.requestLogger);
 
 // Routes
 app.use("/api/v1/auth", authRouter);
