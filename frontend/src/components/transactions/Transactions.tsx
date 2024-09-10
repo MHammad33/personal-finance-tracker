@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TransactionForm from "./TransactionForm";
+import { Button } from "../ui/button";
 
 interface Transaction {
 	id: string;
@@ -35,6 +36,7 @@ const initialTransactions: Transaction[] = [
 const Transactions: React.FC = () => {
 	const [transactions, setTransactions] =
 		useState<Transaction[]>(initialTransactions);
+	const [showTransactionForm, setShowTransactionForm] = useState(false);
 
 	const addTransaction = (transaction: Omit<Transaction, "id">) => {
 		setTransactions((prev) => [
@@ -47,7 +49,12 @@ const Transactions: React.FC = () => {
 		<div className="p-6 bg-white dark:bg-gray-900 min-h-screen">
 			<h1 className="text-2xl font-bold mb-4">Transactions</h1>
 
-			<TransactionForm onSubmit={addTransaction} />
+			<div className="w-full text-right">
+				<Button onClick={() => setShowTransactionForm((prev) => !prev)}>
+					{showTransactionForm ? "Cancel" : "Add"} Transaction
+				</Button>
+			</div>
+			{showTransactionForm && <TransactionForm onSubmit={addTransaction} />}
 
 			<table className="min-w-full bg-white dark:bg-gray-800 mt-6">
 				<thead>
