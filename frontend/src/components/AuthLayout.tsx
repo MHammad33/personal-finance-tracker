@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAuthContext } from "@/context/AuthContext";
 
@@ -13,15 +13,22 @@ const Protected: FC<AuthGuardProps> = ({ children, requiresAuth = true }) => {
 	// const { isLoggedIn, isLoading } = useAuthContext();
 	const navigate = useNavigate();
 
-	useEffect(() => {
+	const handleNavigation = useCallback(() => {
 		if (!isLoading) {
-			if (requiresAuth && !isLoggedIn) {
-				navigate("/login");
-			} else if (!requiresAuth && isLoggedIn) {
-				navigate("/dashboard");
+			const shouldRedirectToLogin = requiresAuth && !isLoggedIn;
+			const shouldRedirectToDashboard = !requiresAuth && isLoggedIn;
+
+			if (shouldRedirectToLogin) {
+				navigate("/login", { replace: true });
+			} else if (shouldRedirectToDashboard) {
+				navigate("/dashboard", { replace: true });
 			}
 		}
 	}, [isLoggedIn, isLoading, navigate, requiresAuth]);
+
+	useEffect(() => {
+		handleNavigation();
+	}, [handleNavigation]);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
