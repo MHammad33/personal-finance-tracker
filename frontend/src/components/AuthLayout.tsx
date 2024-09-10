@@ -1,6 +1,7 @@
+import { RootState } from "@/store";
 import { FC, ReactNode, useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { useAuthContext } from "@/context/AuthContext";
 
 interface AuthGuardProps {
 	children: ReactNode;
@@ -8,9 +9,10 @@ interface AuthGuardProps {
 }
 
 const Protected: FC<AuthGuardProps> = ({ children, requiresAuth = true }) => {
-	const isLoggedIn = false;
-	const isLoading = false;
-	// const { isLoggedIn, isLoading } = useAuthContext();
+	const { isLoggedIn, isLoading } = useSelector(
+		(state: RootState) => state.auth
+	);
+
 	const navigate = useNavigate();
 
 	const handleNavigation = useCallback(() => {
