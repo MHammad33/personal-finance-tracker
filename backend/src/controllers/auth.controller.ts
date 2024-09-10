@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import User, { IUser } from "../models/User.model";
+import User from "../models/User.model";
+import UnauthenticatedError from "../error/unauthenticated.error";
 
 const register = async (req: Request, res: Response) => {
   const { username, email, password } = req.body;
@@ -23,7 +24,7 @@ const login = async (req: Request, res: Response) => {
 };
 
 const handleAuthError = (res: Response) => {
-  return res.status(401).json({ message: "Invalid username or password" });
+  throw new UnauthenticatedError("Invalid username or password");
 };
 
 export default {

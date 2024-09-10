@@ -25,9 +25,7 @@ const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
     }
   }
 
-  res.status(customError.statusCode).json({ message: customError.msg });
-
-  next(error);
+  return res.status(customError.statusCode).json({ message: customError.msg });
 };
 
 const notFound = (request: Request, response: Response) => {
