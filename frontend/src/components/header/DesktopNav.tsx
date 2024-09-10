@@ -44,12 +44,20 @@ const DesktopNav: FC = () => {
 					</Link>
 				</div>
 			) : (
-				<Link
-					to="/profile"
-					className="flex items-center text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
-				>
-					<User size={20} />
-				</Link>
+				<div className="flex space-x-2">
+					<Link
+						to="/logout"
+						className="text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+					>
+						Logout
+					</Link>
+					<Link
+						to="/profile"
+						className="flex items-center text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+					>
+						<User size={20} />
+					</Link>
+				</div>
 			)}
 		</div>
 	);
