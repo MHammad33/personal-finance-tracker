@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { RootState } from "..";
 
 interface AuthState {
 	isLoggedIn: boolean;
@@ -45,5 +47,7 @@ const authSlice = createSlice({
 
 export const { loginStart, loginSuccess, loginFailure, logout } =
 	authSlice.actions;
+
+export const useAuth = () => useSelector((state: RootState) => state.auth);
 
 export default authSlice.reducer;
