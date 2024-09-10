@@ -38,7 +38,7 @@ const routes: RouteObject[] = [
 			},
 			{ path: "about", element: <About /> },
 			{
-				path: "add-transaction",
+				path: "transactions",
 				element: (
 					<AuthLayout>
 						<Transaction />
