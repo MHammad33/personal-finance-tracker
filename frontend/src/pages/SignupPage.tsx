@@ -1,4 +1,5 @@
 // Signup.tsx
+import authService from "@/services/authService";
 import { FC, useState } from "react";
 
 const Signup: FC = () => {
@@ -13,10 +14,16 @@ const Signup: FC = () => {
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// Handle form submission logic
 		console.log("Signup form data:", formData);
+
+		try {
+			const message = await authService.register(formData);
+			alert(message);
+		} catch (error) {
+			console.log("Error Registering...", error);
+		}
 	};
 
 	return (

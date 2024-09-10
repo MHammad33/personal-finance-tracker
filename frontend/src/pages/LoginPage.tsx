@@ -1,4 +1,5 @@
 // Login.tsx
+import authService from "@/services/authService";
 import {
 	loginFailure,
 	loginStart,
@@ -25,8 +26,7 @@ const Login: FC = () => {
 
 		dispatch(loginStart());
 		try {
-			// const user = await authenticateUser();
-			let user = { id: "1", username: "hammad", email: "h@gmail.com" };
+			const user = await authService.login(formData);
 			dispatch(loginSuccess(user));
 		} catch (error) {
 			dispatch(loginFailure());

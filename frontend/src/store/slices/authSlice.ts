@@ -4,16 +4,16 @@ interface AuthState {
 	isLoggedIn: boolean;
 	isLoading: boolean;
 	user: null | {
-		id: string;
 		username: string;
-		email: string;
 	};
+	token: string | null;
 }
 
 const initialState: AuthState = {
 	isLoggedIn: false,
 	isLoading: false,
 	user: null,
+	token: null,
 };
 
 const authSlice = createSlice({
@@ -23,10 +23,14 @@ const authSlice = createSlice({
 		loginStart(state) {
 			state.isLoading = true;
 		},
-		loginSuccess(state, action: PayloadAction<AuthState["user"]>) {
+		loginSuccess(
+			state,
+			action: PayloadAction<{ token: string; username: string }>
+		) {
 			state.isLoggedIn = true;
 			state.isLoading = false;
-			state.user = action.payload;
+			state.user = { username: action.payload.username };
+			state.token = action.payload.token;
 		},
 		loginFailure(state) {
 			state.isLoading = false;
@@ -34,6 +38,7 @@ const authSlice = createSlice({
 		logout(state) {
 			state.isLoggedIn = false;
 			state.user = null;
+			state.token = null;
 		},
 	},
 });
