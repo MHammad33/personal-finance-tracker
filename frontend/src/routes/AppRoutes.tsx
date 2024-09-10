@@ -13,6 +13,7 @@ const Signup = lazy(() => import("../pages/SignupPage"));
 const About = lazy(() => import("../pages/AboutPage"));
 const Transaction = lazy(() => import("../pages/TransactionPage"));
 const DashboardPage = lazy(() => import("../pages/DashboardPage"));
+const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 
 const routes: RouteObject[] = [
 	{
@@ -50,6 +51,14 @@ const routes: RouteObject[] = [
 				element: (
 					<AuthLayout>
 						<DashboardPage />
+					</AuthLayout>
+				),
+			},
+			{
+				path: "profile",
+				element: (
+					<AuthLayout>
+						<ProfilePage />
 					</AuthLayout>
 				),
 			},

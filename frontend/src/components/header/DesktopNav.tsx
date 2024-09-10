@@ -44,9 +44,12 @@ const DesktopNav: FC = () => {
 					</Link>
 				</div>
 			) : (
-				<button className="flex items-center text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded">
+				<Link
+					to="/profile"
+					className="flex items-center text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+				>
 					<User size={20} />
-				</button>
+				</Link>
 			)}
 		</div>
 	);
