@@ -1,21 +1,36 @@
 // Login.tsx
+import {
+	loginFailure,
+	loginStart,
+	loginSuccess,
+} from "@/store/slices/authSlice";
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Login: FC = () => {
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	});
+	const dispatch = useDispatch();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// Handle form submission logic
 		console.log("Login form data:", formData);
+
+		dispatch(loginStart());
+		try {
+			// const user = await authenticateUser();
+			let user = { id: "1", username: "hammad", email: "h@gmail.com" };
+			dispatch(loginSuccess(user));
+		} catch (error) {
+			dispatch(loginFailure());
+		}
 	};
 
 	return (
