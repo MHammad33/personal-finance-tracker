@@ -1,4 +1,5 @@
 import { Layout } from "@/components";
+import AuthLayout from "@/components/AuthLayout";
 import React, { lazy, Suspense } from "react";
 import {
 	createBrowserRouter,
@@ -19,11 +20,39 @@ const routes: RouteObject[] = [
 		element: <Layout />,
 		children: [
 			{ path: "/", element: <Home isLoggedIn={false} /> },
-			{ path: "login", element: <Login /> },
-			{ path: "signup", element: <Signup /> },
+			{
+				path: "login",
+				element: (
+					<AuthLayout requiresAuth={false}>
+						<Login />
+					</AuthLayout>
+				),
+			},
+			{
+				path: "signup",
+				element: (
+					<AuthLayout requiresAuth={false}>
+						<Signup />
+					</AuthLayout>
+				),
+			},
 			{ path: "about", element: <About /> },
-			{ path: "add-transaction", element: <Transaction /> },
-			{ path: "dashboard", element: <DashboardPage /> },
+			{
+				path: "add-transaction",
+				element: (
+					<AuthLayout>
+						<Transaction />
+					</AuthLayout>
+				),
+			},
+			{
+				path: "dashboard",
+				element: (
+					<AuthLayout>
+						<DashboardPage />
+					</AuthLayout>
+				),
+			},
 		],
 	},
 ];
