@@ -1,26 +1,31 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, ErrorRequestHandler } from "express";
 import logger from "./logger";
 
-const errorHandler = (
-  error: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
   logger.error(error.message);
   console.error(error.message);
   console.error(error.name);
 
+  let customError = {
+    statusCode: error.statusCode || 500,
+    msg: error.message || "Something went wrong. Try again later"
+  };
+
   if (error.name === "CastError") {
-    return res.status(400).send({ error: "malformatted id" });
+    customError.msg = "malformatted id";
+    customError.statusCode = 400;
   } else if (error.name === "ValidationError") {
-    return res.status(400).json({ error: error.message });
-  } else if (
-    error.name === "MongoServerError" &&
-    error.message.includes("E11000 duplicate key error")
-  ) {
-    return res.status(400).json({ error: "expected `username` to be unique" });
+    customError.msg = error.message;
+    customError.statusCode = 400;
+  } else if (error.name === "MongoServerError") {
+    if (error.message.includes("E11000 duplicate key error")) {
+      const duplicateField = Object.keys(error.keyValue)[0];
+      customError.msg = `Duplicate key error: The ${duplicateField} already exists`;
+      customError.statusCode = 400;
+    }
   }
+
+  res.status(customError.statusCode).json({ message: customError.msg });
 
   next(error);
 };

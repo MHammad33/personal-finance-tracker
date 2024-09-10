@@ -46,14 +46,19 @@ describe("User Registration and Login", () => {
     });
 
     test("Fails with Status Code 400 if email exists", async () => {
-      await api.post(`${baseUrl}/register`).send(testUser);
+      await api
+        .post(`${baseUrl}/register`)
+        .send({ ...testUser, username: "unique" });
 
       const response = await api
         .post(`${baseUrl}/register`)
         .send(testUser)
         .expect(400);
 
-      assert.equal(response.body.message, "User already exists");
+      assert.equal(
+        response.body.message,
+        `Duplicate key error: The email already exists`
+      );
     });
   });
 
