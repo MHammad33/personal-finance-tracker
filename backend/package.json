@@ -9,7 +9,8 @@
     "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../frontend && npm run build && @powershell Copy-Item -Recurse dist ../backend",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix ",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:file": "cross-env NODE_ENV=test glob -c \"node --test --require ts-node/register\" \"./src/tests/transactions.test.ts\""
   },
   "keywords": [],
   "author": "",
