@@ -25,8 +25,6 @@ after(async () => {
 });
 
 afterEach(async () => {
-  await User.deleteMany({});
-  await Transaction.deleteMany({});
   if (mongoose.connection.db) {
     await mongoose.connection.db.dropDatabase();
   }
@@ -36,7 +34,8 @@ describe("Transaction API", () => {
   let token: string;
 
   before(async () => {
-    await connectDB(config.MONGODB_URI);
+    await User.deleteMany({});
+    await Transaction.deleteMany({});
 
     await api.post(`${baseUrl}/auth/register`).send(testUser).expect(201);
     const loginResponse = await api

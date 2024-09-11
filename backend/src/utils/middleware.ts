@@ -9,10 +9,14 @@ import logger from "./logger";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import User from "../models/User.model";
 import config from "./config";
+import mongoose from "mongoose";
 
 declare module "express-serve-static-core" {
   interface Request {
-    user?: JwtPayload;
+    user?: {
+      userId: mongoose.Types.ObjectId;
+      username: string;
+    };
   }
 }
 
@@ -81,7 +85,7 @@ const userExtractor: RequestHandler = async (req, res, next) => {
 
   req.user = {
     username: user.username,
-    userId: user._id
+    userId: user._id as mongoose.Types.ObjectId
   };
 
   next();

@@ -16,7 +16,7 @@ app.use(middleware.requestLogger);
 
 // Routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/transactions", transactionsRouter);
+app.use("/api/v1/transactions", middleware.userExtractor, transactionsRouter);
 
 // Error Handling middlewares
 app.use(middleware.notFound);
