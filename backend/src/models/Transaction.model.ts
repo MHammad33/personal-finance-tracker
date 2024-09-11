@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export interface Transaction extends Document {
+export interface TransactionType extends Document {
   userId: mongoose.Types.ObjectId;
   amount: number;
   type: "income" | "expense";
@@ -48,9 +48,9 @@ transactionSchema.set("toJSON", {
   }
 });
 
-const Transaction = mongoose.model<Transaction>(
+const Transaction = mongoose.model<TransactionType>(
   "Transaction",
   transactionSchema
 );
 
-module.exports = Transaction;
+export default Transaction;
