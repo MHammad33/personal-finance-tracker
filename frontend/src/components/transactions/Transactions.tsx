@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TransactionForm from "./TransactionForm";
 import { Button } from "../ui/button";
+import transactionService from "@/services/transactionService";
 
 interface Transaction {
 	id: string;
@@ -12,38 +13,21 @@ interface Transaction {
 	category: string;
 }
 
-const initialTransactions: Transaction[] = [
-	{
-		id: "1",
-		userId: "123",
-		date: "2024-09-10",
-		description: "Salary",
-		amount: 5000,
-		type: "income",
-		category: "Work",
-	},
-	{
-		id: "2",
-		userId: "123",
-		date: "2024-09-11",
-		description: "Grocery",
-		amount: -150,
-		type: "expense",
-		category: "Food",
-	},
-];
-
 const Transactions: React.FC = () => {
-	const [transactions, setTransactions] =
-		useState<Transaction[]>(initialTransactions);
+	const [transactions, setTransactions] = useState<Transaction[]>([]);
 	const [showTransactionForm, setShowTransactionForm] = useState(false);
 
-	const addTransaction = (transaction: Omit<Transaction, "id">) => {
-		setTransactions((prev) => [
-			...prev,
-			{ ...transaction, id: Date.now().toString() },
-		]);
-	};
+	useEffect(() => {
+		const fetchTransactions = async () => {
+			const trasactionsData = await transactionService.fetchAllTransactions();
+			setTransactions(trasactionsData);
+		};
+		fetchTransactions();
+	}, []);
+
+	if (!transactions) {
+		return <>Loading...</>;
+	}
 
 	return (
 		<div className="p-6 bg-white dark:bg-gray-900 min-h-screen">
@@ -54,7 +38,7 @@ const Transactions: React.FC = () => {
 					{showTransactionForm ? "Cancel" : "Add"} Transaction
 				</Button>
 			</div>
-			{showTransactionForm && <TransactionForm onSubmit={addTransaction} />}
+			{showTransactionForm && <TransactionForm />}
 
 			<table className="min-w-full bg-white dark:bg-gray-800 mt-6">
 				<thead>
@@ -69,7 +53,15 @@ const Transactions: React.FC = () => {
 				<tbody>
 					{transactions.map((transaction) => (
 						<tr key={transaction.id} className="border-b">
-							<td className="py-2 px-4">{transaction.date}</td>
+							<td className="py-2 px-4">
+								{new Intl.DateTimeFormat("en-GB", {
+									timeZone: "Asia/Karachi",
+									weekday: "short",
+									year: "numeric",
+									month: "short",
+									day: "numeric",
+								}).format(new Date(transaction.date))}
+							</td>
 							<td className="py-2 px-4">{transaction.description}</td>
 							<td className="py-2 px-4">{transaction.category}</td>
 							<td
