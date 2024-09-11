@@ -3,12 +3,20 @@ import { FC } from "react";
 import IncomeChart from "./charts/IncomeChart";
 import ExpensesChart from "./charts/ExpensesChart";
 import BudgetOverviewChart from "./charts/BudgetOverviewChart";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface DashboardProps {
 	// Define any props if needed
 }
 
 const Dashboard: FC<DashboardProps> = () => {
+	const transactions = useSelector((state: RootState) =>
+		[...state.transactions.transactions]
+			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+			.slice(0, 5)
+	);
+
 	return (
 		<div className="bg-gray-50 dark:bg-gray-900 min-h-screen p-6 md:p-8">
 			<h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
@@ -25,22 +33,15 @@ const Dashboard: FC<DashboardProps> = () => {
 						habits and income sources.
 					</p>
 					<ul className="space-y-4">
-						<li className="flex justify-between text-gray-700 dark:text-gray-300">
-							<span>Groceries</span>
-							<span>₨ 50.00</span>
-						</li>
-						<li className="flex justify-between text-gray-700 dark:text-gray-300">
-							<span>Utilities</span>
-							<span>₨ 120.00</span>
-						</li>
-						<li className="flex justify-between text-gray-700 dark:text-gray-300">
-							<span>Salary</span>
-							<span>₨ 2000.00</span>
-						</li>
+						{transactions?.map((transaction) => (
+							<li className="flex justify-between text-gray-700 dark:text-gray-300">
+								<span>{transaction.category}</span>
+								<span>₨ {transaction.amount}</span>
+							</li>
+						))}
 					</ul>
 				</section>
 
-				{/* Income Chart */}
 				<section className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 col-span-1 md:col-span-2 lg:col-span-2">
 					<IncomeChart />
 				</section>
