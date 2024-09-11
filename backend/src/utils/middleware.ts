@@ -1,5 +1,20 @@
-import { NextFunction, Request, Response, ErrorRequestHandler } from "express";
+import {
+  NextFunction,
+  Request,
+  Response,
+  ErrorRequestHandler,
+  RequestHandler
+} from "express";
 import logger from "./logger";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import User from "../models/User.model";
+import config from "./config";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    user?: JwtPayload;
+  }
+}
 
 const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
   logger.error(error.message);
@@ -43,8 +58,38 @@ const requestLogger = (
   logger.info("---");
   next();
 };
+
+const userExtractor: RequestHandler = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    logger.info("No authorization header provided");
+    return res.status(401).json({ error: "No token provided" });
+  }
+  const token = authHeader.split(" ")[1];
+
+  const decodedToken = jwt.verify(token, config.JWT_SECRET_KEY) as JwtPayload;
+  if (!decodedToken.userId) {
+    logger.info("Invalid token, missing userId");
+    return res.status(401).json({ error: "Invalid token" });
+  }
+
+  const user = await User.findById(decodedToken.userId);
+  if (!user) {
+    logger.info("No user found with id:", decodedToken.userId);
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  req.user = {
+    username: user.username,
+    userId: user._id
+  };
+
+  next();
+};
+
 export default {
   errorHandler,
   notFound,
-  requestLogger
+  requestLogger,
+  userExtractor
 };
