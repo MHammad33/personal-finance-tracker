@@ -1,19 +1,40 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
+import { useSelector } from "react-redux";
 import ApexCharts from "react-apexcharts";
+import { RootState } from "../../store/index"; // Adjust the import path as needed
 
 const ExpensesChart: FC = () => {
+	// Fetch transactions from the Redux state
+	const transactions = useSelector(
+		(state: RootState) => state.transactions.transactions
+	);
+
+	// Calculate total expenses by category
+	const { categories, expenses } = useMemo(() => {
+		const totals: Record<string, number> = {};
+
+		transactions.forEach((transaction: any) => {
+			if (transaction.type === "expense") {
+				if (totals[transaction.category]) {
+					totals[transaction.category] += transaction.amount;
+				} else {
+					totals[transaction.category] = transaction.amount;
+				}
+			}
+		});
+
+		return {
+			categories: Object.keys(totals),
+			expenses: Object.values(totals),
+		};
+	}, [transactions]);
+
 	const options = {
 		chart: {
 			type: "bar" as const,
 		},
 		xaxis: {
-			categories: [
-				"Rent",
-				"Utilities",
-				"Groceries",
-				"Entertainment",
-				"Transportation",
-			],
+			categories: categories,
 		},
 		colors: ["#FF4560"],
 	};
@@ -21,7 +42,7 @@ const ExpensesChart: FC = () => {
 	const series = [
 		{
 			name: "Expenses",
-			data: [1200, 300, 200, 400, 150],
+			data: expenses,
 		},
 	];
 
