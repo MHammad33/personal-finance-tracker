@@ -10,6 +10,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import User from "../models/User.model";
 import config from "./config";
 import mongoose from "mongoose";
+import NotFoundError from "../error/not-found.error";
 
 declare module "express-serve-static-core" {
   interface Request {
@@ -80,7 +81,7 @@ const userExtractor: RequestHandler = async (req, res, next) => {
   const user = await User.findById(decodedToken.userId);
   if (!user) {
     logger.info("No user found with id:", decodedToken.userId);
-    return res.status(404).json({ error: "User not found" });
+    throw new NotFoundError("User not found");
   }
 
   req.user = {

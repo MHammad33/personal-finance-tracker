@@ -1,4 +1,10 @@
-import test, { after, afterEach, before, describe } from "node:test";
+import test, {
+  after,
+  afterEach,
+  before,
+  beforeEach,
+  describe
+} from "node:test";
 import connectDB from "../db/connectDb";
 import config from "../utils/config";
 import mongoose from "mongoose";
@@ -33,9 +39,8 @@ afterEach(async () => {
 describe("Transaction API", () => {
   let token: string;
 
-  before(async () => {
+  beforeEach(async () => {
     await User.deleteMany({});
-    await Transaction.deleteMany({});
 
     await api.post(`${baseUrl}/auth/register`).send(testUser).expect(201);
     const loginResponse = await api
@@ -62,6 +67,19 @@ describe("Transaction API", () => {
         .set("Authorization", `Bearer ${token}`)
         .send(transactionData)
         .expect(201);
+    });
+  });
+
+  describe("GET /api/v1/transactions", () => {
+    test("should fetch all transactions for authenticated user", async () => {
+      const response = await api
+        .get(`${baseUrl}/transactions`)
+        .set("Authorization", `Bearer ${token}`)
+        .expect(200);
+    });
+
+    test("should return unauthorized for missing token", async () => {
+      const response = await api.get(`${baseUrl}/transactions`).expect(401);
     });
   });
 });
