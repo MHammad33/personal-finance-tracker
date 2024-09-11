@@ -84,6 +84,7 @@ const TransactionForm: React.FC = () => {
 						name="amount"
 						value={formData.amount}
 						onChange={handleChange}
+						onFocus={(e) => e.target.select()}
 						required
 						className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
 					/>
@@ -121,6 +122,7 @@ const TransactionForm: React.FC = () => {
 						value={formData.category}
 						onChange={handleCategoryChange}
 						className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+						required
 					>
 						<option value="">Select a category</option>
 						{predefinedCategories.map((cat) => (
@@ -137,6 +139,7 @@ const TransactionForm: React.FC = () => {
 							name="category"
 							value={formData.category}
 							onChange={handleCustomCategoryChange}
+							required
 							placeholder="Enter custom category"
 							className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
 						/>
@@ -156,7 +159,6 @@ const TransactionForm: React.FC = () => {
 						name="date"
 						value={formData.date}
 						onChange={handleChange}
-						required
 						className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
 					/>
 				</div>
