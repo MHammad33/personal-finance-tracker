@@ -1,10 +1,8 @@
+import transactionService from "@/services/transactionService";
 import { useState } from "react";
 
 interface Transaction {
-	id: string;
-	userId: string;
 	date: string;
-	description: string;
 	amount: number;
 	type: "income" | "expense";
 	category: string;
@@ -19,17 +17,12 @@ const predefinedCategories = [
 	"Transportation",
 ];
 
-const TransactionForm: React.FC<{
-	onSubmit: (transaction: Omit<Transaction, "id">) => void;
-}> = ({ onSubmit }) => {
-	const [formData, setFormData] = useState({
-		userId: "",
-		description: "",
-		amount: "",
+const TransactionForm: React.FC = () => {
+	const [formData, setFormData] = useState<Transaction>({
+		amount: 0,
 		type: "income",
 		category: "",
 		date: "",
-		customCategory: "",
 	});
 
 	const [isCustomCategory, setIsCustomCategory] = useState(false);
@@ -50,27 +43,20 @@ const TransactionForm: React.FC<{
 	const handleCustomCategoryChange = (
 		e: React.ChangeEvent<HTMLInputElement>
 	) => {
-		setFormData({ ...formData, customCategory: e.target.value });
+		setFormData({ ...formData, category: e.target.value });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		onSubmit({
-			userId: formData.userId,
-			description: formData.description,
-			amount: parseFloat(formData.amount),
-			type: formData.type as "income" | "expense",
-			category: isCustomCategory ? formData.customCategory : formData.category,
-			date: formData.date,
-		});
+
+		const data = await transactionService.addTransaction(formData);
+		console.log("data", data);
+
 		setFormData({
-			userId: "",
-			description: "",
-			amount: "",
+			amount: 0,
 			type: "income",
 			category: "",
 			date: "",
-			customCategory: "",
 		});
 		setIsCustomCategory(false);
 	};
@@ -85,7 +71,6 @@ const TransactionForm: React.FC<{
 					Add Transaction
 				</h2>
 
-				{/* Amount */}
 				<div>
 					<label
 						htmlFor="amount"
@@ -104,7 +89,6 @@ const TransactionForm: React.FC<{
 					/>
 				</div>
 
-				{/* Type */}
 				<div>
 					<label
 						htmlFor="type"
@@ -124,7 +108,6 @@ const TransactionForm: React.FC<{
 					</select>
 				</div>
 
-				{/* Category */}
 				<div>
 					<label
 						htmlFor="category"
@@ -151,8 +134,8 @@ const TransactionForm: React.FC<{
 						<input
 							type="text"
 							id="customCategory"
-							name="customCategory"
-							value={formData.customCategory}
+							name="category"
+							value={formData.category}
 							onChange={handleCustomCategoryChange}
 							placeholder="Enter custom category"
 							className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -160,7 +143,6 @@ const TransactionForm: React.FC<{
 					)}
 				</div>
 
-				{/* Date */}
 				<div>
 					<label
 						htmlFor="date"
