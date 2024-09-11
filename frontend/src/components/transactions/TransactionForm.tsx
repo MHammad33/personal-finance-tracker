@@ -10,6 +10,15 @@ interface Transaction {
 	category: string;
 }
 
+const predefinedCategories = [
+	"Salary",
+	"Food",
+	"Entertainment",
+	"Utilities",
+	"Healthcare",
+	"Transportation",
+];
+
 const TransactionForm: React.FC<{
 	onSubmit: (transaction: Omit<Transaction, "id">) => void;
 }> = ({ onSubmit }) => {
@@ -20,9 +29,11 @@ const TransactionForm: React.FC<{
 		type: "income",
 		category: "",
 		date: "",
+		customCategory: "",
 	});
 
-	// Handle form field changes
+	const [isCustomCategory, setIsCustomCategory] = useState(false);
+
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
@@ -30,7 +41,18 @@ const TransactionForm: React.FC<{
 		setFormData({ ...formData, [name]: value });
 	};
 
-	// Handle form submission
+	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const value = e.target.value;
+		setFormData({ ...formData, category: value });
+		setIsCustomCategory(value === "custom");
+	};
+
+	const handleCustomCategoryChange = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
+		setFormData({ ...formData, customCategory: e.target.value });
+	};
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		onSubmit({
@@ -38,7 +60,7 @@ const TransactionForm: React.FC<{
 			description: formData.description,
 			amount: parseFloat(formData.amount),
 			type: formData.type as "income" | "expense",
-			category: formData.category,
+			category: isCustomCategory ? formData.customCategory : formData.category,
 			date: formData.date,
 		});
 		setFormData({
@@ -48,7 +70,9 @@ const TransactionForm: React.FC<{
 			type: "income",
 			category: "",
 			date: "",
+			customCategory: "",
 		});
+		setIsCustomCategory(false);
 	};
 
 	return (
@@ -60,25 +84,6 @@ const TransactionForm: React.FC<{
 				<h2 className="text-2xl font-bold text-gray-800 dark:text-white text-center">
 					Add Transaction
 				</h2>
-
-				{/* User ID */}
-				<div>
-					<label
-						htmlFor="userId"
-						className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-					>
-						User ID
-					</label>
-					<input
-						type="text"
-						id="userId"
-						name="userId"
-						value={formData.userId}
-						onChange={handleChange}
-						required
-						className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-					/>
-				</div>
 
 				{/* Amount */}
 				<div>
@@ -127,15 +132,32 @@ const TransactionForm: React.FC<{
 					>
 						Category
 					</label>
-					<input
-						type="text"
+					<select
 						id="category"
 						name="category"
 						value={formData.category}
-						onChange={handleChange}
-						required
+						onChange={handleCategoryChange}
 						className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-					/>
+					>
+						<option value="">Select a category</option>
+						{predefinedCategories.map((cat) => (
+							<option key={cat} value={cat}>
+								{cat}
+							</option>
+						))}
+						<option value="custom">Custom</option>
+					</select>
+					{isCustomCategory && (
+						<input
+							type="text"
+							id="customCategory"
+							name="customCategory"
+							value={formData.customCategory}
+							onChange={handleCustomCategoryChange}
+							placeholder="Enter custom category"
+							className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+						/>
+					)}
 				</div>
 
 				{/* Date */}
