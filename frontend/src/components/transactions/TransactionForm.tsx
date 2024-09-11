@@ -1,5 +1,7 @@
 import transactionService from "@/services/transactionService";
+import { addTransaction } from "@/store/slices/transactionSlice";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface Transaction {
 	date: string;
@@ -19,6 +21,7 @@ const predefinedCategories = [
 ];
 
 const TransactionForm: React.FC = () => {
+	const dispatch = useDispatch();
 	const [formData, setFormData] = useState<Transaction>({
 		amount: 0,
 		description: "",
@@ -52,7 +55,7 @@ const TransactionForm: React.FC = () => {
 		e.preventDefault();
 
 		const data = await transactionService.addTransaction(formData);
-		console.log("data", data);
+		dispatch(addTransaction(data));
 
 		setFormData({
 			amount: 0,

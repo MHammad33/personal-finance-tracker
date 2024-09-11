@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
 import TransactionForm from "./TransactionForm";
 import { Button } from "../ui/button";
-import transactionService from "@/services/transactionService";
-
-interface Transaction {
-	id: string;
-	userId: string;
-	date: string;
-	description: string;
-	amount: number;
-	type: "income" | "expense";
-	category: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { fetchTransactions } from "@/store/slices/transactionSlice";
 
 const Transactions: React.FC = () => {
-	const [transactions, setTransactions] = useState<Transaction[]>([]);
+	const dispatch = useDispatch<AppDispatch>();
+	const transactions = useSelector(
+		(state: RootState) => state.transactions.transactions
+	);
+
 	const [showTransactionForm, setShowTransactionForm] = useState(false);
 
 	useEffect(() => {
-		const fetchTransactions = async () => {
-			const trasactionsData = await transactionService.fetchAllTransactions();
-			setTransactions(trasactionsData);
-		};
-		fetchTransactions();
+		dispatch(fetchTransactions());
 	}, []);
 
 	if (!transactions) {
