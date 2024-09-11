@@ -20,6 +20,11 @@ const transactionSchema = new mongoose.Schema(
       required: true,
       min: 0
     },
+    description: {
+      type: String,
+      required: true,
+      min: 3
+    },
     type: {
       type: String,
       enum: ["income", "expense"],

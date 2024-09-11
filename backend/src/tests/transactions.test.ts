@@ -9,7 +9,6 @@ import connectDB from "../db/connectDb";
 import config from "../utils/config";
 import mongoose from "mongoose";
 import User from "../models/User.model";
-import Transaction from "../models/Transaction.model";
 import app from "../app";
 import supertest from "supertest";
 
@@ -59,7 +58,8 @@ describe("Transaction API", () => {
       const transactionData = {
         amount: 100,
         type: "income",
-        category: "Salary"
+        category: "Salary",
+        description: "Description"
       };
 
       const response = await api

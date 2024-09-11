@@ -3,6 +3,7 @@ import { useState } from "react";
 
 interface Transaction {
 	date: string;
+	description: string;
 	amount: number;
 	type: "income" | "expense";
 	category: string;
@@ -20,6 +21,7 @@ const predefinedCategories = [
 const TransactionForm: React.FC = () => {
 	const [formData, setFormData] = useState<Transaction>({
 		amount: 0,
+		description: "",
 		type: "income",
 		category: "",
 		date: "",
@@ -54,6 +56,7 @@ const TransactionForm: React.FC = () => {
 
 		setFormData({
 			amount: 0,
+			description: "",
 			type: "income",
 			category: "",
 			date: "",
@@ -83,6 +86,25 @@ const TransactionForm: React.FC = () => {
 						id="amount"
 						name="amount"
 						value={formData.amount}
+						onChange={handleChange}
+						onFocus={(e) => e.target.select()}
+						required
+						className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+					/>
+				</div>
+
+				<div>
+					<label
+						htmlFor="description"
+						className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+					>
+						Description
+					</label>
+					<input
+						type="text"
+						id="description"
+						name="description"
+						value={formData.description}
 						onChange={handleChange}
 						onFocus={(e) => e.target.select()}
 						required

@@ -7,11 +7,12 @@ const fetchAllTransactions = async (req: Request, res: Response) => {
 };
 
 const createNewTransaction = async (req: Request, res: Response) => {
-  const { amount, type, category, date } = req.body;
+  const { amount, type, category, date, description } = req.body;
   const userId = req.user?.userId;
   const newTransaction = new Transaction({
     userId,
     amount,
+    description,
     type,
     category,
     date
