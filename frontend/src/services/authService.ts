@@ -36,13 +36,7 @@ const register = async (
 	return response.data;
 };
 
-export const logout = () => {
-	// TODO: ADD LOGOUT LOGIC
-	return Promise.resolve();
-};
-
 export default {
 	login,
 	register,
-	logout,
 };

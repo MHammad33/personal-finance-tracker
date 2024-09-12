@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
-import { useAuth } from "@/store/slices/authSlice";
+import { logout, useAuth } from "@/store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const DesktopNav: FC = () => {
+	const dispatch = useDispatch();
 	const { isLoggedIn } = useAuth();
 
 	return (
@@ -46,8 +48,11 @@ const DesktopNav: FC = () => {
 			) : (
 				<div className="flex space-x-2">
 					<Link
-						to="/logout"
+						to="/"
 						className="text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+						onClick={() => {
+							dispatch(logout());
+						}}
 					>
 						Logout
 					</Link>

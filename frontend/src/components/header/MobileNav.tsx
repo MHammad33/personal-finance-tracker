@@ -1,6 +1,7 @@
-import { useAuth } from "@/store/slices/authSlice";
+import { logout, useAuth } from "@/store/slices/authSlice";
 import { User } from "lucide-react";
 import { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 interface MobileNavProps {
@@ -8,6 +9,7 @@ interface MobileNavProps {
 }
 
 const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
+	const dispatch = useDispatch();
 	const { isLoggedIn } = useAuth();
 	return (
 		<nav
@@ -59,8 +61,11 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 			) : (
 				<>
 					<Link
-						to="/logout"
+						to="/"
 						className="text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+						onClick={() => {
+							dispatch(logout());
+						}}
 					>
 						Logout
 					</Link>
