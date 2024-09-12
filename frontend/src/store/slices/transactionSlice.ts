@@ -1,5 +1,6 @@
 import transactionService from "@/services/transactionService";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppDispatch } from "..";
 
 interface Transaction {
 	id: string;
@@ -33,7 +34,7 @@ const transactionSlice = createSlice({
 
 export const { addTransaction, setTransactions } = transactionSlice.actions;
 
-export const fetchTransactions = () => async (dispatch: any) => {
+export const fetchAllTransactions = () => async (dispatch: AppDispatch) => {
 	console.log("Fetching...");
 	try {
 		const transactions = await transactionService.fetchAllTransactions();

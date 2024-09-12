@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TransactionForm from "./TransactionForm";
 import { Button } from "../ui/button";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store";
-import { fetchTransactions } from "@/store/slices/transactionSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const Transactions: React.FC = () => {
-	const dispatch = useDispatch<AppDispatch>();
 	const transactions = useSelector(
 		(state: RootState) => state.transactions.transactions
 	);
 
 	const [showTransactionForm, setShowTransactionForm] = useState(false);
-
-	useEffect(() => {
-		dispatch(fetchTransactions());
-	}, []);
 
 	if (!transactions) {
 		return <>Loading...</>;

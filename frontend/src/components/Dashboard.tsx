@@ -14,11 +14,16 @@ const Dashboard: FC<DashboardProps> = () => {
 
 	const transactions = useMemo(
 		() =>
+			allTransactions &&
 			[...allTransactions]
 				.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 				.slice(0, 5),
 		[allTransactions]
 	);
+
+	if (!transactions) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<div className="bg-gray-50 dark:bg-gray-900 min-h-screen p-6 md:p-8">
