@@ -31,7 +31,10 @@ const calculateMonthlyIncome = (
 			month: "long",
 		});
 
-		if (monthlyIncome.hasOwnProperty(transactionMonth)) {
+		if (
+			transaction.type === "income" &&
+			monthlyIncome.hasOwnProperty(transactionMonth)
+		) {
 			monthlyIncome[transactionMonth] += transaction.amount;
 		}
 	});
@@ -54,7 +57,7 @@ const IncomeChart: FC = () => {
 			type: "line" as const,
 		},
 		xaxis: {
-			categories: ["January", "February", "March", "April", "May", "June"],
+			categories: lastSixMonths,
 		},
 		colors: ["#00E396"],
 	};
