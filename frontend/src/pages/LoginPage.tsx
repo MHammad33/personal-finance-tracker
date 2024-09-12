@@ -7,8 +7,11 @@ import {
 import { setLoading } from "@/store/slices/loadingSlice";
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login: FC = () => {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
@@ -29,8 +32,11 @@ const Login: FC = () => {
 		try {
 			const user: any = await authService.login(formData);
 			dispatch(loginSuccess(user));
+			toast("Login Successfull");
+			navigate("/dashboard");
 		} catch (error) {
 			dispatch(loginFailure());
+			toast.error("Invalid Username or Password");
 		} finally {
 			dispatch(setLoading(false));
 		}
