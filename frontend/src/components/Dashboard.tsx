@@ -1,5 +1,5 @@
 // src/pages/DashboardPage.tsx
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import IncomeChart from "./charts/IncomeChart";
 import ExpensesChart from "./charts/ExpensesChart";
 import BudgetOverviewChart from "./charts/BudgetOverviewChart";
@@ -11,10 +11,16 @@ interface DashboardProps {
 }
 
 const Dashboard: FC<DashboardProps> = () => {
-	const transactions = useSelector((state: RootState) =>
-		[...state.transactions.transactions]
-			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-			.slice(0, 5)
+	const allTransactions = useSelector(
+		(state: RootState) => state.transactions.transactions
+	);
+
+	const transactions = useMemo(
+		() =>
+			[...allTransactions]
+				.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+				.slice(0, 5),
+		[allTransactions]
 	);
 
 	return (
