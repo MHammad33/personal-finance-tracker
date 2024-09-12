@@ -115,6 +115,8 @@ const Profile: FC = () => {
 						</div>
 					</form>
 				)}
+
+				<h2 className="text-center w-full p-4 bg-red-500">Coming Soon...</h2>
 			</div>
 		</div>
 	);
