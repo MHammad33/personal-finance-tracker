@@ -1,9 +1,11 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import IncomeChart from "./charts/IncomeChart";
 import ExpensesChart from "./charts/ExpensesChart";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
 import BudgetSection from "./BudgetSection";
+import { fetchAllTransactions } from "@/store/slices/transactionSlice";
+import { setLoading } from "@/store/slices/loadingSlice";
 
 interface DashboardProps {}
 
@@ -21,9 +23,13 @@ const Dashboard: FC<DashboardProps> = () => {
 		[allTransactions]
 	);
 
-	if (!transactions) {
-		return <div>Loading...</div>;
-	}
+	const dispatch = useDispatch<AppDispatch>();
+
+	useEffect(() => {
+		dispatch(setLoading(true));
+		dispatch(fetchAllTransactions());
+		dispatch(setLoading(false));
+	}, []);
 
 	return (
 		<div className="bg-gray-50 dark:bg-gray-900 min-h-screen p-6 md:p-8">

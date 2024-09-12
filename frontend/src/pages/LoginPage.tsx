@@ -4,6 +4,7 @@ import {
 	loginStart,
 	loginSuccess,
 } from "@/store/slices/authSlice";
+import { setLoading } from "@/store/slices/loadingSlice";
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -24,11 +25,14 @@ const Login: FC = () => {
 		console.log("Login form data:", formData);
 
 		dispatch(loginStart());
+		dispatch(setLoading(true));
 		try {
-			const user = await authService.login(formData);
+			const user: any = await authService.login(formData);
 			dispatch(loginSuccess(user));
 		} catch (error) {
 			dispatch(loginFailure());
+		} finally {
+			dispatch(setLoading(false));
 		}
 	};
 
