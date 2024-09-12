@@ -1,5 +1,6 @@
 import { Layout } from "@/components";
 import AuthLayout from "@/components/AuthLayout";
+import Spinner from "@/components/Spinner";
 import React, { lazy, Suspense } from "react";
 import {
 	createBrowserRouter,
@@ -71,7 +72,13 @@ const router = createBrowserRouter(routes);
 const AppRoutes: React.FC = () => {
 	return (
 		// TODO: Create Loading Component
-		<Suspense fallback={<div>Loading...</div>}>
+		<Suspense
+			fallback={
+				<div>
+					<Spinner />
+				</div>
+			}
+		>
 			<RouterProvider router={router} />
 		</Suspense>
 	);

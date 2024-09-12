@@ -30,7 +30,10 @@ const Header: FC<HeaderProps> = () => {
 				<Menu size={24} />
 			</button>
 
-			<MobileNav isMenuOpen={isMenuOpen} />
+			<MobileNav
+				isMenuOpen={isMenuOpen}
+				closeMenu={() => setIsMenuOpen(false)}
+			/>
 
 			<div className="hidden md:flex items-center space-x-2">
 				<DesktopNav />

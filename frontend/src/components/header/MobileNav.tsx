@@ -7,11 +7,13 @@ import { toast } from "react-toastify";
 
 interface MobileNavProps {
 	isMenuOpen: boolean;
+	closeMenu(): void;
 }
 
-const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
+const MobileNav: FC<MobileNavProps> = ({ isMenuOpen, closeMenu }) => {
 	const dispatch = useDispatch();
 	const { isLoggedIn } = useAuth();
+
 	return (
 		<nav
 			className={`flex flex-col md:flex-row items-center md:space-x-4 bg-white dark:bg-gray-800 transition-all duration-300 ease-in-out border-t md:border-none ${
@@ -23,18 +25,21 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 			<Link
 				to="/dashboard"
 				className="px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+				onClick={closeMenu}
 			>
 				Dashboard
 			</Link>
 			<Link
 				to="/about"
 				className="block px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+				onClick={closeMenu}
 			>
 				About
 			</Link>
 			<Link
 				to="/transactions"
 				className="block px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+				onClick={closeMenu}
 			>
 				Transactions
 			</Link>
@@ -45,16 +50,17 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 						isMenuOpen ? "opacity-100" : "opacity-0"
 					}`}
 				>
-					{/* Added transition to improve visibility changes */}
 					<Link
 						to="/login"
 						className="block px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+						onClick={closeMenu}
 					>
 						Login
 					</Link>
 					<Link
 						to="/signup"
 						className="block px-4 py-2 rounded transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-gray-700"
+						onClick={closeMenu}
 					>
 						Sign Up
 					</Link>
@@ -67,6 +73,7 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 						onClick={() => {
 							dispatch(logout());
 							toast.success("Signed out successfully");
+							closeMenu();
 						}}
 					>
 						Logout
@@ -74,6 +81,7 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 					<Link
 						to="/profile"
 						className="flex items-center justify-center gap-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+						onClick={closeMenu}
 					>
 						<User size={20} />
 						Profile
