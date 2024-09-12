@@ -2,6 +2,7 @@ import { RootState } from "@/store";
 import { FC, ReactNode, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
 interface AuthGuardProps {
 	children: ReactNode;
@@ -16,27 +17,24 @@ const Protected: FC<AuthGuardProps> = ({ children, requiresAuth = true }) => {
 	const navigate = useNavigate();
 
 	const handleNavigation = useCallback(() => {
-		if (!isLoading) {
-			const shouldRedirectToLogin = requiresAuth && !isLoggedIn;
-			const shouldRedirectToDashboard = !requiresAuth && isLoggedIn;
-
-			if (shouldRedirectToLogin) {
-				navigate("/login", { replace: true });
-			} else if (shouldRedirectToDashboard) {
-				navigate("/dashboard", { replace: true });
-			}
+		if (!isLoggedIn && requiresAuth) {
+			navigate("/login");
 		}
-	}, [isLoggedIn, isLoading, navigate, requiresAuth]);
+	}, [isLoggedIn, navigate, requiresAuth]);
 
 	useEffect(() => {
 		handleNavigation();
 	}, [handleNavigation]);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return (
+			<div>
+				<Spinner />
+			</div>
+		);
 	}
 
-	return <>{children}</>;
+	return isLoggedIn || !requiresAuth ? <>{children}</> : null;
 };
 
 export default Protected;
