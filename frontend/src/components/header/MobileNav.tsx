@@ -3,6 +3,7 @@ import { User } from "lucide-react";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface MobileNavProps {
 	isMenuOpen: boolean;
@@ -65,6 +66,7 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 						className="text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
 						onClick={() => {
 							dispatch(logout());
+							toast.success("Signed out successfully");
 						}}
 					>
 						Logout

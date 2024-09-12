@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { User } from "lucide-react";
 import { logout, useAuth } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const DesktopNav: FC = () => {
 	const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const DesktopNav: FC = () => {
 						className="text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
 						onClick={() => {
 							dispatch(logout());
+							toast.success("Signed out successfully");
 						}}
 					>
 						Logout
