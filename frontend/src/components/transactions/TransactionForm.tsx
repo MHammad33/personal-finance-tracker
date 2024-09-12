@@ -2,6 +2,7 @@ import transactionService from "@/services/transactionService";
 import { addTransaction } from "@/store/slices/transactionSlice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 interface Transaction {
 	date: string;
@@ -56,6 +57,8 @@ const TransactionForm: React.FC = () => {
 
 		const data = await transactionService.addTransaction(formData);
 		dispatch(addTransaction(data));
+
+		toast("Transaction Added Successfully");
 
 		setFormData({
 			amount: 0,
