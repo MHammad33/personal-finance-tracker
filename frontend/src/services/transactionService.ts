@@ -8,14 +8,17 @@ interface Transaction {
 }
 
 const baseUrl = "/api/v1/transactions";
-let token = "";
 
-const setToken = (newToken: string) => {
-	token = `Bearer ${newToken}`;
+const getTokenFromLocalStorage = () => {
+	const storedToken = localStorage.getItem("token");
+	return storedToken ? `Bearer ${JSON.parse(storedToken)}` : "";
 };
 
 const addTransaction = async (transaction: Transaction) => {
 	try {
+		const token = getTokenFromLocalStorage();
+		if (!token) throw new Error("Authorization token is missing.");
+
 		const config = {
 			headers: {
 				Authorization: token,
@@ -30,6 +33,8 @@ const addTransaction = async (transaction: Transaction) => {
 
 const fetchAllTransactions = async () => {
 	try {
+		const token = getTokenFromLocalStorage();
+		if (!token) throw new Error("Authorization token is missing.");
 		const config = {
 			headers: {
 				Authorization: token,
@@ -45,5 +50,4 @@ const fetchAllTransactions = async () => {
 export default {
 	addTransaction,
 	fetchAllTransactions,
-	setToken,
 };

@@ -1,6 +1,4 @@
-// Login.tsx
 import authService from "@/services/authService";
-import transactionService from "@/services/transactionService";
 import {
 	loginFailure,
 	loginStart,
@@ -28,7 +26,6 @@ const Login: FC = () => {
 		dispatch(loginStart());
 		try {
 			const user = await authService.login(formData);
-			transactionService.setToken(user.token);
 			dispatch(loginSuccess(user));
 		} catch (error) {
 			dispatch(loginFailure());
