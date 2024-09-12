@@ -5,11 +5,9 @@ import MobileNav from "./MobileNav";
 import DarkModeToggle from "./DarkModeToggle";
 import DesktopNav from "./DesktopNav";
 
-interface HeaderProps {
-	isLoggedIn: boolean;
-}
+interface HeaderProps {}
 
-const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
+const Header: FC<HeaderProps> = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const toggleMenu = useCallback(() => {
@@ -32,10 +30,10 @@ const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
 				<Menu size={24} />
 			</button>
 
-			<MobileNav isMenuOpen={isMenuOpen} isLoggedIn={isLoggedIn} />
+			<MobileNav isMenuOpen={isMenuOpen} />
 
 			<div className="hidden md:flex items-center space-x-2">
-				<DesktopNav isLoggedIn={isLoggedIn} />
+				<DesktopNav />
 				<DarkModeToggle />
 			</div>
 		</header>
