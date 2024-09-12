@@ -1,8 +1,11 @@
-// Signup.tsx
 import authService from "@/services/authService";
+import { setLoading } from "@/store/slices/loadingSlice";
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Signup: FC = () => {
+	const dispatch = useDispatch();
 	const [formData, setFormData] = useState({
 		username: "",
 		email: "",
@@ -16,13 +19,20 @@ const Signup: FC = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log("Signup form data:", formData);
-
+		dispatch(setLoading(true));
 		try {
-			const message = await authService.register(formData);
-			alert(message);
+			await authService.register(formData);
+			toast.success("Registered Successfully. Login to get access to our app.");
 		} catch (error) {
 			console.log("Error Registering...", error);
+			toast.error("Registration failed. Please try again later.");
+		} finally {
+			dispatch(setLoading(false));
+			setFormData({
+				username: "",
+				email: "",
+				password: "",
+			});
 		}
 	};
 
