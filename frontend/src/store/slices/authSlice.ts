@@ -11,11 +11,16 @@ interface AuthState {
 	token: string | null;
 }
 
+const getDataFromLocalStorage = (key: string) => {
+	const data = localStorage.getItem(key);
+	return data ? JSON.parse(data) : null;
+};
+
 const initialState: AuthState = {
-	isLoggedIn: false,
+	isLoggedIn: Boolean(getDataFromLocalStorage("token")),
 	isLoading: false,
-	user: null,
-	token: null,
+	user: getDataFromLocalStorage("user"),
+	token: getDataFromLocalStorage("token"),
 };
 
 const authSlice = createSlice({
@@ -33,6 +38,11 @@ const authSlice = createSlice({
 			state.isLoading = false;
 			state.user = { username: action.payload.username };
 			state.token = action.payload.token;
+			localStorage.setItem("token", JSON.stringify(action.payload.token));
+			localStorage.setItem(
+				"user",
+				JSON.stringify({ username: action.payload.username })
+			);
 		},
 		loginFailure(state) {
 			state.isLoading = false;
@@ -41,6 +51,8 @@ const authSlice = createSlice({
 			state.isLoggedIn = false;
 			state.user = null;
 			state.token = null;
+			localStorage.removeItem("token");
+			localStorage.removeItem("user");
 		},
 	},
 });
