@@ -15,6 +15,10 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("Finance Tracker");
+});
+
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/transactions", middleware.userExtractor, transactionsRouter);
 
