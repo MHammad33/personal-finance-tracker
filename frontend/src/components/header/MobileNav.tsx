@@ -1,4 +1,5 @@
 import { useAuth } from "@/store/slices/authSlice";
+import { User } from "lucide-react";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
@@ -35,7 +36,7 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 				Transactions
 			</Link>
 
-			{!isLoggedIn && (
+			{!isLoggedIn ? (
 				<div
 					className={`flex flex-col items-center w-full space-y-2 transition-opacity duration-300 ease-in-out ${
 						isMenuOpen ? "opacity-100" : "opacity-0"
@@ -55,6 +56,22 @@ const MobileNav: FC<MobileNavProps> = ({ isMenuOpen }) => {
 						Sign Up
 					</Link>
 				</div>
+			) : (
+				<>
+					<Link
+						to="/logout"
+						className="text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+					>
+						Logout
+					</Link>
+					<Link
+						to="/profile"
+						className="flex items-center justify-center gap-2 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 px-4 py-2 rounded"
+					>
+						<User size={20} />
+						Profile
+					</Link>
+				</>
 			)}
 		</nav>
 	);
