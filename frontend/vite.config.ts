@@ -13,7 +13,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "https://personal-finance-tracker-backend-kohl.vercel.app/",
+				target: "https://personal-finance-tracker-backend-kohl.vercel.app",
 				changeOrigin: true,
 			},
 		},
