@@ -12,3 +12,4 @@ transactionsRouter
     .get(transactions_controller_1.default.fetchAllTransactions)
     .post(transactions_controller_1.default.createNewTransaction);
 exports.default = transactionsRouter;
+//# sourceMappingURL=transactions.route.js.map

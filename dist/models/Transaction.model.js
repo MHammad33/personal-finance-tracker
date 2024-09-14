@@ -46,3 +46,4 @@ transactionSchema.set("toJSON", {
 });
 const Transaction = mongoose_1.default.model("Transaction", transactionSchema);
 exports.default = Transaction;
+//# sourceMappingURL=Transaction.model.js.map

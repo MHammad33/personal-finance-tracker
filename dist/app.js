@@ -28,3 +28,4 @@ app.use("/api/v1/transactions", middleware_1.default.userExtractor, transactions
 app.use(middleware_1.default.notFound);
 app.use(middleware_1.default.errorHandler);
 exports.default = app;
+//# sourceMappingURL=app.js.map

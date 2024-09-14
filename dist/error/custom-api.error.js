@@ -6,3 +6,4 @@ class CustomApiError extends Error {
     }
 }
 exports.default = CustomApiError;
+//# sourceMappingURL=custom-api.error.js.map

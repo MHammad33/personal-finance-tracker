@@ -39,3 +39,4 @@ exports.default = {
     login,
     register
 };
+//# sourceMappingURL=auth.controller.js.map

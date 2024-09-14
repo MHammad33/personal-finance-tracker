@@ -26,3 +26,4 @@ const connectDB = (mongoUri) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.default = connectDB;
+//# sourceMappingURL=connectDb.js.map

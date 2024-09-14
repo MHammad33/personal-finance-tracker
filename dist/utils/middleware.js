@@ -81,3 +81,4 @@ exports.default = {
     requestLogger,
     userExtractor
 };
+//# sourceMappingURL=middleware.js.map

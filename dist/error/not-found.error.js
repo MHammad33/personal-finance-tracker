@@ -12,3 +12,4 @@ class NotFoundError extends custom_api_error_1.default {
     }
 }
 exports.default = NotFoundError;
+//# sourceMappingURL=not-found.error.js.map

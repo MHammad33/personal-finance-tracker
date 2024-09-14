@@ -14,3 +14,4 @@ exports.default = {
     JWT_SECRET_KEY,
     JWT_SECRET_LIFETIME
 };
+//# sourceMappingURL=config.js.map

@@ -13,3 +13,4 @@ exports.default = {
     NotFoundError: not_found_error_1.default,
     UnauthenticatedError: unauthenticated_error_1.default
 };
+//# sourceMappingURL=index.js.map

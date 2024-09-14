@@ -37,3 +37,4 @@ exports.default = {
     fetchAllTransactions,
     createNewTransaction
 };
+//# sourceMappingURL=transactions.controller.js.map
