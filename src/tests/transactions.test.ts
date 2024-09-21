@@ -16,8 +16,8 @@ const baseUrl = "/api/v1";
 const api = supertest(app);
 
 const testUser = {
-  username: `testuser`,
-  email: `testuser@example.com`,
+  username: "testuser",
+  email: "testuser@example.com",
   password: "password123"
 };
 
@@ -62,7 +62,7 @@ describe("Transaction API", () => {
         description: "Description"
       };
 
-      const response = await api
+      await api
         .post(`${baseUrl}/transactions`)
         .set("Authorization", `Bearer ${token}`)
         .send(transactionData)
@@ -72,14 +72,14 @@ describe("Transaction API", () => {
 
   describe("GET /api/v1/transactions", () => {
     test("should fetch all transactions for authenticated user", async () => {
-      const response = await api
+      await api
         .get(`${baseUrl}/transactions`)
         .set("Authorization", `Bearer ${token}`)
         .expect(200);
     });
 
     test("should return unauthorized for missing token", async () => {
-      const response = await api.get(`${baseUrl}/transactions`).expect(401);
+      await api.get(`${baseUrl}/transactions`).expect(401);
     });
   });
 });

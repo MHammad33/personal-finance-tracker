@@ -17,8 +17,8 @@ const baseUrl = "/api/v1/auth";
 const api = supertest(app);
 
 const testUser = {
-  username: `testuser`,
-  email: `testuser@example.com`,
+  username: "testuser",
+  email: "testuser@example.com",
   password: "password123"
 };
 
@@ -57,7 +57,7 @@ describe("User Registration and Login", () => {
 
       assert.equal(
         response.body.message,
-        `Duplicate key error: The email already exists`
+        "Duplicate key error: The email already exists"
       );
     });
   });

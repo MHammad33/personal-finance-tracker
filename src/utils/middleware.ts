@@ -21,12 +21,12 @@ declare module "express-serve-static-core" {
   }
 }
 
-const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (error, req, res) => {
   logger.error(error.message);
   console.error(error.message);
   console.error(error.name);
 
-  let customError = {
+  const customError = {
     statusCode: error.statusCode || 500,
     msg: error.message || "Something went wrong. Try again later"
   };
