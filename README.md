@@ -63,3 +63,13 @@ expenses and incomes, and track their spending through various graph views.
   page and provide relevant data.
 - **View Transactions**: Go to the transactions page listed in the navbar.
 - **Switch Graph Views for Tracking**: Use static graph views in the Dashboard.
+
+## 6. Deployment
+
+The project is deployed on **Vercel**. You can access it here:
+[https://finance-frontend-rust-three.vercel.app/](https://finance-frontend-rust-three.vercel.app/).
+
+## 7. License
+
+**All rights reserved**: This project is copyrighted, and all rights are
+reserved by the author.
