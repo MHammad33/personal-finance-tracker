@@ -56,3 +56,10 @@ expenses and incomes, and track their spending through various graph views.
 
 6. **Open in browser**:
    - Visit `http://localhost:5173` to view the application.
+
+## 5. Usage Instructions
+
+- **Add Income/Expense**: Click the "Add Expense" button on the transactions
+  page and provide relevant data.
+- **View Transactions**: Go to the transactions page listed in the navbar.
+- **Switch Graph Views for Tracking**: Use static graph views in the Dashboard.
