@@ -10,3 +10,9 @@ expenses and incomes, and track their spending through various graph views.
 - Add income/expense
 - View transactions
 - Track spending through multiple views of graphs (static graphs)
+
+## 3. Technologies Used
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express, TypeScript
+- **Database**: MongoDB
