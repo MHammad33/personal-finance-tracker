@@ -63,8 +63,13 @@ expenses and incomes, and track their spending through various graph views.
 
 ## 5. Usage Instructions
 
-- **Add Income/Expense**: Click the "Add Expense" button on the transactions
-  page and provide relevant data.
+- **Add Transactions**: Click the "Add Transactions" button on the transactions
+  page, and provide the relevant details. For example:
+  - Amount: "100"
+  - Description: "Groceries"
+  - Type: "Income"
+  - Category: "Food"
+  - Date: "Oct 16, 2024" page and provide relevant data.
 - **View Transactions**: Go to the transactions page listed in the navbar.
 - **Switch Graph Views for Tracking**: Use static graph views in the Dashboard.
 
