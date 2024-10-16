@@ -78,6 +78,15 @@ expenses and incomes, and track their spending through various graph views.
 The project is deployed on **Vercel**. You can access it here:
 [https://finance-frontend-rust-three.vercel.app/](https://finance-frontend-rust-three.vercel.app/).
 
+## 7. Troubleshooting
+
+- **Issue**: MongoDB connection error
+  - **Solution**: Ensure that the `MONGODB_URI` in your `.env` file is correct
+    and the MongoDB service is running.
+- **Issue**: App not running on `http://localhost:5173`
+  - **Solution**: Ensure both the backend (`npm run server`) and frontend
+    (`npm run client`) are running.
+
 ## 7. License
 
 **All rights reserved**: This project is copyrighted, and all rights are
