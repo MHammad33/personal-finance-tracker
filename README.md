@@ -67,7 +67,7 @@ expenses and incomes, and track their spending through various graph views.
   page, and provide the relevant details. For example:
   - Amount: "100"
   - Description: "Groceries"
-  - Type: "Income"
+  - Type: "Income" or "Expense"
   - Category: "Food"
   - Date: "Oct 16, 2024" page and provide relevant data.
 - **View Transactions**: Go to the transactions page listed in the navbar.
@@ -87,7 +87,37 @@ The project is deployed on **Vercel**. You can access it here:
   - **Solution**: Ensure both the backend (`npm run server`) and frontend
     (`npm run client`) are running.
 
-## 7. License
+## 8. API Documentation
+
+- **POST /api/transactions**: Add a new transaction
+
+  - Request body:
+    ```json
+    {
+      "type": "expense",
+      "amount": 100,
+      "category": "Food",
+      "description": "Grocery shopping",
+      "date": "2024-10-16"
+    }
+    ```
+  - Response:
+
+    ```json
+    {
+      "userId": "66e5a078db305707435bef0f",
+      "amount": 100,
+      "description": "Groceries",
+      "type": "expense",
+      "category": "Food",
+      "date": "2024-10-16T00:00:00.000Z",
+      "createdAt": "2024-10-16T09:28:21.888Z",
+      "updatedAt": "2024-10-16T09:28:21.888Z",
+      "id": "670f8735978fb6717c20bb9a"
+    }
+    ```
+
+## 9. License
 
 **All rights reserved**: This project is copyrighted, and all rights are
 reserved by the author.
