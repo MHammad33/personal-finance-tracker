@@ -117,7 +117,17 @@ The project is deployed on **Vercel**. You can access it here:
     }
     ```
 
-## 9. License
+## 9. Contributing
+
+Contributions are welcome! Here's how you can get started:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a pull request.
+
+## 10. License
 
 **All rights reserved**: This project is copyrighted, and all rights are
 reserved by the author.
