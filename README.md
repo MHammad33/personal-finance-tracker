@@ -5,6 +5,10 @@
 **Personal Finance Tracker** is a web application that enables users to add
 expenses and incomes, and track their spending through various graph views.
 
+## 1.1 Visual Overview
+
+![App Screenshot](image.png)
+
 ## 2. Features
 
 - Add income/expense
