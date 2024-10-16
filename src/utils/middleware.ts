@@ -35,7 +35,13 @@ const errorHandler: ErrorRequestHandler = (error, req, res) => {
     customError.msg = "malformatted id";
     customError.statusCode = 400;
   } else if (error.name === "ValidationError") {
-    customError.msg = error.message;
+    const messages = Object.values(error.errors).map(val => {
+      if (val instanceof mongoose.Error.ValidationError) {
+        return val.message;
+      }
+      return "Unknown Validation Error";
+    });
+    customError.msg = messages.join(",");
     customError.statusCode = 400;
   } else if (error.name === "MongoServerError") {
     if (error.message.includes("E11000 duplicate key error")) {
