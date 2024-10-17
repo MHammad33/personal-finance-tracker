@@ -10,10 +10,12 @@ interface TransactionBody {
 }
 
 const fetchAllTransactions = async (req: Request, res: Response) => {
-  const { page = 1, limit = 10, sort = "desc" } = req.query;
+  const { page = 1, limit = 10, sort = "desc", category } = req.query;
   const userId = req.user?.userId;
 
-  const transactions = await Transaction.find({ userId })
+  const filter = { userId, ...(category ? { category } : {}) };
+
+  const transactions = await Transaction.find(filter)
     .sort({ date: sort === "desc" ? -1 : 1 })
     .limit(Number(limit))
     .skip((Number(page) - 1) * Number(limit));
