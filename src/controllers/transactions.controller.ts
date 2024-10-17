@@ -10,7 +10,13 @@ interface TransactionBody {
 }
 
 const fetchAllTransactions = async (req: Request, res: Response) => {
-  const transactions = await Transaction.find({ userId: req.user?.userId });
+  const { page = 1, limit = 10 } = req.query;
+  const userId = req.user?.userId;
+
+  const transactions = await Transaction.find({ userId })
+    .limit(Number(limit))
+    .skip((Number(page) - 1) * Number(limit));
+
   res.status(200).json(transactions);
 };
 
