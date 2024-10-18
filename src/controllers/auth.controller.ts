@@ -20,7 +20,13 @@ const login = async (req: Request, res: Response) => {
   if (!isPasswordValid) return handleAuthError();
 
   const token = userFound.createJWT();
-  res.status(200).json({ token, username: userFound.username });
+  res
+    .status(200)
+    .json({
+      token,
+      username: userFound.username,
+      message: "User registered successfully"
+    });
 };
 
 const handleAuthError = () => {
