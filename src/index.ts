@@ -21,9 +21,10 @@ const connectDbWithRetry = async (retries = 5) => {
 const startServer = async () => {
   try {
     await connectDbWithRetry();
-    app.listen(config.PORT, () =>
-      logger.info("Server listening on port " + config.PORT)
-    );
+    await new Promise<void>(resolve => {
+      app.listen(config.PORT, resolve);
+    });
+    logger.info("Server listening on port " + config.PORT);
   } catch (error) {
     logger.error("Error connecting to server", error);
     process.exit(1);
