@@ -11,6 +11,7 @@ const startServer = async () => {
     );
   } catch (error) {
     logger.error("Error connecting to server", error);
+    process.exit(1);
   }
 };
 
