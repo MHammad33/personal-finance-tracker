@@ -57,7 +57,7 @@ expenses and incomes, and track their spending through various graph views.
 5. **Run the frontend application**:
 
    ```bash
-   npm run dev
+   npm run client
    ```
 
 6. **Open in browser**:
@@ -128,6 +128,8 @@ Contributions are welcome! Here's how you can get started:
 3. Make your changes and commit them (`git commit -m 'Add new feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a pull request.
+6. Wait for review and address any feedback provided by the maintainers.
+7. Once approved, your feature will be merged.
 
 ## 10. License
 
