@@ -45,6 +45,8 @@ expenses and incomes, and track their spending through various graph views.
      MONGODB_URI=<your-mongodb-uri>
      PORT=5000
      ```
+     Note: Ensure to replace `<your-mongodb-uri>` with the actual URI string
+     from your MongoDB account.
 
 4. **Run the backend server**:
 
@@ -55,7 +57,7 @@ expenses and incomes, and track their spending through various graph views.
 5. **Run the frontend application**:
 
    ```bash
-   npm run client
+   npm run dev
    ```
 
 6. **Open in browser**:
