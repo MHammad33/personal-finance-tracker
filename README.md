@@ -69,7 +69,7 @@ expenses and incomes, and track their spending through various graph views.
   - Description: "Groceries"
   - Type: "Income" or "Expense"
   - Category: "Food"
-  - Date: "Oct 16, 2024" page and provide relevant data.
+  - Date: "Oct 16, 2024"
 - **View Transactions**: Go to the transactions page listed in the navbar.
 - **Switch Graph Views for Tracking**: Use static graph views in the Dashboard.
 
