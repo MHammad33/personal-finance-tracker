@@ -57,7 +57,7 @@ expenses and incomes, and track their spending through various graph views.
 5. **Run the frontend application**:
 
    ```bash
-   npm run client
+   npm run dev
    ```
 
 6. **Open in browser**:
