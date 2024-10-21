@@ -1,26 +1,11 @@
 import app from "./app";
-import connectDB from "./db/connectDb";
+import { connectDbWithRetry } from "./db/connectDb";
 import config from "./utils/config";
 import logger from "./utils/logger";
 
-const connectDbWithRetry = async (retries = 5) => {
-  while (retries) {
-    try {
-      await connectDB(config.MONGODB_URI);
-      break;
-    } catch (error) {
-      console.error(`Retrying... (${retries})`, error);
-      retries -= 1;
-      await new Promise(res => setTimeout(res, 5000));
-    }
-  }
-
-  if (!retries) process.exit(1);
-};
-
 const startServer = async () => {
   try {
-    await connectDbWithRetry();
+    await connectDbWithRetry(config.MONGODB_URI);
     await new Promise<void>(resolve => {
       app.listen(config.PORT, resolve);
     });
