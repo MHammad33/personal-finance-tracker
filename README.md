@@ -83,8 +83,18 @@ expenses and incomes, and track their spending through various graph views.
     - Category: `Food`
     - Date: `2024-10-16`
 
-- **View Transactions**: Go to the transactions page listed in the navbar.
-- **Switch Graph Views for Tracking**: Use static graph views in the Dashboard.
+- **View Transactions**: Go to the transactions page listed in the navbar to see
+  all recorded transactions.
+
+- **Switch Graph Views for Tracking**: Use static graph views in the Dashboard
+  to analyze spending over time, categorized by types (income vs. expense) and
+  categories (e.g., Food, Transportation).
+
+- **Edit Transactions**: Click on any transaction to edit the details, such as
+  changing the amount or category.
+
+- **Delete Transactions**: Use the delete option next to each transaction to
+  remove it from your records.
 
 ## 6. Deployment
 
@@ -134,13 +144,35 @@ The project is deployed on **Vercel**. You can access it here:
 
 Contributions are welcome! Here's how you can get started:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a pull request.
-6. Wait for review and address any feedback provided by the maintainers.
-7. Once approved, your feature will be merged.
+1. **Fork the repository**: Create a personal copy of the project by forking the
+   repository on GitHub.
+2. **Create a new branch**: Use the following command to create a new branch for
+   your feature:
+
+   ```bash
+   git checkout -b feature-branch
+   ```
+
+3. Make your changes: Implement your feature or bug fix in the new branch.
+4. Commit your changes: Use a clear and descriptive commit message:
+
+   ```bash
+   git commit -m 'Add new feature or fix issue'
+   ```
+
+5. Push to the branch: Push your changes to your forked repository:
+
+   ```bash
+   git push origin feature-branch
+   ```
+
+6. Create a pull request: Navigate to the original repository on GitHub and
+   click "New Pull Request" to submit your changes for review.
+
+7. Wait for review: Once you submit your pull request, wait for feedback from
+   the maintainers. Be prepared to address any comments or suggestions.
+
+8. Merge: After approval, your changes will be merged into the main branch.
 
 ## 10. License
 
