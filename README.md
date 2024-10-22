@@ -107,7 +107,7 @@ The project is deployed on **Vercel**. You can access it here:
 
     ```json
     {
-      "userId": "66e5a078db305707435bef0f",
+      "userId": "unique_user_id",
       "amount": 100,
       "description": "Groceries",
       "type": "expense",
@@ -115,7 +115,7 @@ The project is deployed on **Vercel**. You can access it here:
       "date": "2024-10-16T00:00:00.000Z",
       "createdAt": "2024-10-16T09:28:21.888Z",
       "updatedAt": "2024-10-16T09:28:21.888Z",
-      "id": "670f8735978fb6717c20bb9a"
+      "id": "unique_transaction_id"
     }
     ```
 
