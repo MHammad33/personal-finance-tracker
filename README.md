@@ -87,7 +87,7 @@ The project is deployed on **Vercel**. You can access it here:
     and the MongoDB service is running.
 - **Issue**: App not running on `http://localhost:5173`
   - **Solution**: Ensure both the backend (`npm run server`) and frontend
-    (`npm run client`) are running.
+    (`npm run dev`) are running.
 
 ## 8. API Documentation
 
