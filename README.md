@@ -42,8 +42,8 @@ expenses and incomes, and track their spending through various graph views.
 
    - Create a `.env` file in the root directory with the following variables:
      ```bash
-     MONGODB_URI=<your-mongodb-uri>
-     PORT=5000
+     MONGODB_URI=<your-mongodb-uri> # MongoDB URI for database connection
+     PORT=5000  # Backend server port
      ```
      Note: Ensure to replace `<your-mongodb-uri>` with the actual URI string
      from your MongoDB account.
