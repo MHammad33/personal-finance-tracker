@@ -67,11 +67,22 @@ expenses and incomes, and track their spending through various graph views.
 
 - **Add Transactions**: Click the "Add Transactions" button on the transactions
   page, and provide the relevant details. For example:
+
   - Amount: "100"
   - Description: "Groceries"
   - Type: "Income" or "Expense"
   - Category: "Food"
   - Date: "Oct 16, 2024"
+
+    **Example Usage**:
+
+  - To add an expense for groceries:
+    - Amount: `100`
+    - Description: `Groceries`
+    - Type: `Expense`
+    - Category: `Food`
+    - Date: `2024-10-16`
+
 - **View Transactions**: Go to the transactions page listed in the navbar.
 - **Switch Graph Views for Tracking**: Use static graph views in the Dashboard.
 
