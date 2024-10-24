@@ -154,6 +154,23 @@ The project is deployed on **Vercel**. You can access it here:
     }
     ```
 
+- **GET /api/transactions**: Fetch all transactions
+
+  - Response:
+    ```json
+    [
+      {
+        "id": "unique_transaction_id",
+        "type": "expense",
+        "amount": 100,
+        "category": "Food",
+        "description": "Grocery shopping",
+        "date": "2024-10-16T00:00:00.000Z"
+      }
+      // ...
+    ]
+    ```
+
 ## 9. Contributing
 
 Contributions are welcome! Here's how you can get started:
