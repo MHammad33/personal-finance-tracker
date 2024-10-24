@@ -214,6 +214,12 @@ Contributions are welcome! Here's how you can get started:
 
 8. Merge: After approval, your changes will be merged into the main branch.
 
+### Note for Developers
+
+- Follow standard naming conventions for branches, commits, and variables.
+- Make sure your code passes linting checks before submitting a pull request.
+- Write concise and clear commit messages to improve code readability.
+
 ## 10. License
 
 **All rights reserved**: This project is copyrighted, and all rights are
