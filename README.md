@@ -28,6 +28,8 @@ expenses and incomes, and track their spending through various graph views.
 - Add income/expense
 - View transactions
 - Track spending through multiple views of graphs (static graphs)
+- **User permissions**: Admin users can delete or edit all transactions, while
+  regular users can only modify or delete their own entries.
 
 ## 3. Technologies Used
 
