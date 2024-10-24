@@ -171,6 +171,15 @@ The project is deployed on **Vercel**. You can access it here:
     ]
     ```
 
+- **DELETE /api/transactions/:id**: Delete a specific transaction by ID
+
+  - Response:
+    ```json
+    {
+      "message": "Transaction deleted successfully"
+    }
+    ```
+
 ## 9. Contributing
 
 Contributions are welcome! Here's how you can get started:
