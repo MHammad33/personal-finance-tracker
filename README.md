@@ -1,5 +1,19 @@
 # Personal Finance Tracker Documentation
 
+## Table of Contents
+
+1. [Project Overview](#1-project-overview)
+   1. [Visual Overview](#11-visual-overview)
+2. [Features](#2-features)
+3. [Technologies Used](#3-technologies-used)
+4. [Installation and Setup](#4-installation-and-setup)
+5. [Usage Instructions](#5-usage-instructions)
+6. [Deployment](#6-deployment)
+7. [Troubleshooting](#7-troubleshooting)
+8. [API Documentation](#8-api-documentation)
+9. [Contributing](#9-contributing)
+10. [License](#10-license)
+
 ## 1. Project Overview
 
 **Personal Finance Tracker** is a web application that enables users to add
