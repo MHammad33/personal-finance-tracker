@@ -137,6 +137,14 @@ The project is deployed on **Vercel**. You can access it here:
 
 - **POST /api/transactions**: Add a new transaction
 
+  - Request headers:
+
+  ```json
+  {
+    "Authorization": "Bearer <your-jwt-token>"
+  }
+  ```
+
   - Request body:
     ```json
     {
