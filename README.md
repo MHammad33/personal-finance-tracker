@@ -83,6 +83,11 @@ expenses and incomes, and track their spending through various graph views.
 
 ## 5. Usage Instructions
 
+- **User Roles**: There are two types of users in the application:
+
+  - **Admin User**: Can add, edit, or delete all transactions.
+  - **Regular User**: Can only add, edit, or delete their own transactions.
+
 - **Add Transactions**: Click the "Add Transactions" button on the transactions
   page, and provide the relevant details. For example:
 
