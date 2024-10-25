@@ -240,6 +240,13 @@ Contributions are welcome! Here's how you can get started:
 - Make sure your code passes linting checks before submitting a pull request.
 - Write concise and clear commit messages to improve code readability.
 
+### Guidelines for Pull Requests
+
+- Ensure your code is well-documented with comments.
+- Run all tests before submitting a pull request.
+- Follow the existing code style and formatting guidelines.
+- Create small and focused pull requests instead of large, multi-feature ones.
+
 ## 10. License
 
 **All rights reserved**: This project is copyrighted, and all rights are
