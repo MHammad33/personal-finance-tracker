@@ -24,7 +24,8 @@ into spending habits and trends over time.
 
 ## 1.1 Visual Overview
 
-![App Screenshot](image.png)
+![App Screenshot](image.png) _The Personal Finance Tracker interface showing the
+main dashboard and transaction overview._
 
 ## 2. Features
 
