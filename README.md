@@ -134,8 +134,13 @@ The project is deployed on **Vercel**. You can access it here:
   - **Solution**: Ensure that the `MONGODB_URI` in your `.env` file is correct
     and the MongoDB service is running.
 - **Issue**: App not running on `http://localhost:5173`
+
   - **Solution**: Ensure both the backend (`npm run server`) and frontend
     (`npm run dev`) are running.
+
+- **Issue**: CORS error when accessing the API
+  - **Solution**: Ensure that your backend server allows CORS from your frontend
+    URL.
 
 ## 8. API Documentation
 
