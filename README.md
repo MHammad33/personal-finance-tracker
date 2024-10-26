@@ -257,3 +257,10 @@ Contributions are welcome! Here's how you can get started:
 
 **All rights reserved**: This project is copyrighted, and all rights are
 reserved by the author.
+
+## 11. Frequently Asked Questions (FAQ)
+
+- **Can I export my transactions?**
+
+  Currently, there is no feature to export transactions, but it is on our
+  roadmap for future releases.
