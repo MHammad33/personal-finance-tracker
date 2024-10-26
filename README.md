@@ -34,6 +34,8 @@ main dashboard and transaction overview._
 - Track spending through multiple views of graphs (static graphs)
 - **User permissions**: Admin users can delete or edit all transactions, while
   regular users can only modify or delete their own entries.
+- **Mobile Responsive**: The application is designed to be mobile-responsive,
+  enabling users to manage their finances on smartphones and tablets seamlessly.
 
 ## 3. Technologies Used
 
