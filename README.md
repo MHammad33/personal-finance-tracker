@@ -206,6 +206,17 @@ The project is deployed on **Vercel**. You can access it here:
     }
     ```
 
+### Error Handling
+
+- **401 Unauthorized**: This error occurs if the JWT token is missing or
+  invalid. Ensure you include a valid token in the request header.
+  - Response:
+  ```json
+  {
+    "message": "Unauthorized: Invalid token"
+  }
+  ```
+
 ## 9. Contributing
 
 Contributions are welcome! Here's how you can get started:
