@@ -42,6 +42,7 @@ main dashboard and transaction overview._
 - **Frontend**: React, TypeScript, Tailwind CSS
 - **Backend**: Node.js, Express, TypeScript
 - **Database**: MongoDB
+- **API**: REST
 
 ## 4. Installation and Setup
 
