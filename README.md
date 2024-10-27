@@ -54,9 +54,17 @@ main dashboard and transaction overview._
 
 2. **Install dependencies**:
 
-   - For both frontend and backend, run the following command:
+   - Navigate to the frontend folder:
 
    ```bash
+   cd frontend
+   npm install
+   ```
+
+   - Navigate to the backend folder:
+
+   ```bash
+   cd backend
    npm install
    ```
 
