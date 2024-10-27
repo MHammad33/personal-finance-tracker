@@ -286,3 +286,8 @@ reserved by the author.
 
   Currently, there is no feature to export transactions, but it is on our
   roadmap for future releases.
+
+- **Does the app support multiple currencies?**
+
+  At present, the app only supports transactions in a single currency. Support
+  for multi-currency is planned in future updates.
