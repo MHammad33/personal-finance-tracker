@@ -232,6 +232,9 @@ The project is deployed on **Vercel**. You can access it here:
 
 Contributions are welcome! Here's how you can get started:
 
+Before getting started, please review our
+[contribution guidelines](https://github.com/MHammad33/personal-finance-tracker/CONTRIBUTING.md).
+
 1. **Fork the repository**: Create a personal copy of the project by forking the
    repository on GitHub.
 2. **Create a new branch**: Use the following command to create a new branch for
