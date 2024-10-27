@@ -155,6 +155,8 @@ The project is deployed on **Vercel**. You can access it here:
 
 ## 8. API Documentation
 
+**Note**: All routes require a valid JWT token in the Authorization header.
+
 - **POST /api/transactions**: Add a new transaction
 
   - Request headers:
