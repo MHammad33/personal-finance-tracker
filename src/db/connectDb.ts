@@ -26,3 +26,5 @@ export const connectDbWithRetry = async (uri: string, retries = 5) => {
 
   if (!retries) process.exit(1);
 };
+
+export default connectDB;
