@@ -24,7 +24,11 @@ const fetchAllTransactions = async (req: Request, res: Response) => {
 };
 
 const createNewTransaction = async (
-  req: Request<{}, {}, TransactionBody>,
+  req: Request<
+    Record<string, unknown>,
+    Record<string, unknown>,
+    TransactionBody
+  >,
   res: Response
 ) => {
   const { amount, type, category, date, description } = req.body;

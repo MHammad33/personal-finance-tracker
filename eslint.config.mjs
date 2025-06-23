@@ -14,7 +14,7 @@ export default [
     },
     rules: {
       "@stylistic/js/indent": ["error", 2],
-      "@stylistic/js/linebreak-style": ["error", "windows"],
+      "@stylistic/js/linebreak-style": ["error", "unix"],
       "@stylistic/js/quotes": ["error", "double"],
       "@stylistic/js/semi": ["error"],
 
@@ -29,3 +29,4 @@ export default [
     ignores: ["node_modules/**/*", "dist/**/*"]
   }
 ];
+

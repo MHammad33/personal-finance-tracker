@@ -7,6 +7,7 @@
   "semi": true,
   "proseWrap": "always",
   "printWidth": 80,
-  "endOfLine": "crlf",
+  "endOfLine": "lf",
   "plugins": ["prettier-plugin-tailwindcss"]
 }
+
