@@ -10,12 +10,7 @@ dotenv.config();
 const app: Application = express();
 
 // Middlewares
-app.use(
-  cors({
-    origin: "*"
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
 
