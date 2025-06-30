@@ -16,4 +16,9 @@ const startServer = async () => {
   }
 };
 
-startServer();
+if (!process.env.VERCEL) {
+  // ✅ Only run this locally
+  startServer();
+}
+
+export default app;

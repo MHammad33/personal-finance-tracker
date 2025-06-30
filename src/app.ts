@@ -24,6 +24,10 @@ app.get("/", (req, res) => {
   res.send("Finance Tracker");
 });
 
+app.get("/api/v1", (req, res) => {
+  res.send("Finance Tracker API");
+});
+
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/transactions", middleware.userExtractor, transactionsRouter);
 
