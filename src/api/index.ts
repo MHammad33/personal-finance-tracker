@@ -1,7 +1,7 @@
-import app from "./app";
-import { connectDbWithRetry } from "./db/connectDb";
-import config from "./utils/config";
-import logger from "./utils/logger";
+import app from "../app";
+import { connectDbWithRetry } from "../db/connectDb";
+import config from "../utils/config";
+import logger from "../utils/logger";
 
 const startServer = async () => {
   try {
