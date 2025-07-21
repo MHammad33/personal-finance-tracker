@@ -1,28 +1,7 @@
 import mongoose from "mongoose";
 import logger from "../utils/logger";
-
-interface MongoError extends Error {
-  code?: string;
-  errno?: number;
-  syscall?: string;
-  hostname?: string;
-}
-
-const getErrorMessage = (error: MongoError): string => {
-  if (error.code === "ETIMEOUT") {
-    return "Database connection failed: Network timeout. Please check your internet connection and try again.";
-  }
-
-  if (error.code === "ENOTFOUND") {
-    return "Database connection failed: Could not resolve database hostname. Please check your connection string.";
-  }
-
-  if (error.message?.includes("authentication failed")) {
-    return "Database connection failed: Invalid credentials. Please check your username and password.";
-  }
-
-  return `Database connection failed: ${error.message || "Unknown error"}`;
-};
+import { getDbErrorMessage } from "../utils/dbErrorHandler";
+import { MongoError } from "mongodb"; // Add this import
 
 const connectDB = async (mongoUri?: string): Promise<void> => {
   try {
@@ -31,13 +10,13 @@ const connectDB = async (mongoUri?: string): Promise<void> => {
     }
 
     const connection = await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 10000, // Increased timeout
-      socketTimeoutMS: 45000
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 15000 // Reduced from 45s → 15s
     });
 
     logger.info("Connected to Database", connection.connection.name);
   } catch (error) {
-    const errorMessage = getErrorMessage(error as MongoError);
+    const errorMessage = getDbErrorMessage(error as MongoError);
     logger.error(errorMessage);
     throw new Error(errorMessage);
   }
@@ -45,12 +24,12 @@ const connectDB = async (mongoUri?: string): Promise<void> => {
 
 export const connectDbWithRetry = async (uri: string): Promise<void> => {
   let attempts = 0;
-  const maxAttempts = 2; // Original attempt + 1 retry
+  const maxAttempts = 5;
 
   while (attempts < maxAttempts) {
     try {
       await connectDB(uri);
-      return; // Success, exit function
+      return;
     } catch (error) {
       attempts++;
       const errorMessage =
@@ -62,7 +41,7 @@ export const connectDbWithRetry = async (uri: string): Promise<void> => {
         await new Promise(res => setTimeout(res, 3000));
       } else {
         logger.error(`Final connection attempt failed: ${errorMessage}`);
-        throw error; // Re-throw the error after final attempt
+        throw error;
       }
     }
   }
