@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import logger from "../utils/logger";
 import { getDbErrorMessage } from "../utils/dbErrorHandler";
-import { MongoError } from "mongodb"; // Add this import
+import { MongoError } from "mongodb";
 
 const connectDB = async (mongoUri?: string): Promise<void> => {
   try {
@@ -11,13 +11,12 @@ const connectDB = async (mongoUri?: string): Promise<void> => {
 
     const connection = await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 10000,
-      socketTimeoutMS: 15000 // Reduced from 45s → 15s
+      socketTimeoutMS: 15000
     });
 
     logger.info("Connected to Database", connection.connection.name);
   } catch (error) {
     const errorMessage = getDbErrorMessage(error as MongoError);
-    logger.error(errorMessage);
     throw new Error(errorMessage);
   }
 };
@@ -29,19 +28,39 @@ export const connectDbWithRetry = async (uri: string): Promise<void> => {
   while (attempts < maxAttempts) {
     try {
       await connectDB(uri);
-      return;
+      return; // Successfully connected, exit function
     } catch (error) {
       attempts++;
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";
 
       if (attempts < maxAttempts) {
-        logger.error(`Connection attempt ${attempts} failed`);
-        logger.info("Retrying connection in 3 seconds...");
+        logger.info(
+          `Database connection attempt ${attempts}/${maxAttempts} failed. Retrying in 3 seconds...`
+        );
         await new Promise(res => setTimeout(res, 3000));
       } else {
-        logger.error(`Final connection attempt failed: ${errorMessage}`);
-        throw error;
+        logger.error("DATABASE CONNECTION FAILED");
+
+        if (
+          errorMessage.includes("Network timeout") ||
+          errorMessage.includes("ETIMEOUT")
+        ) {
+          logger.error("Could not resolve the hostname");
+        } else if (errorMessage.includes("authentication failed")) {
+          logger.error("Authentication failed");
+          logger.error(
+            "Please check your username and password in the connection string"
+          );
+        } else {
+          logger.error(`📝 Error details: ${errorMessage}`);
+        }
+
+        logger.info("Server will continue without database connection");
+        logger.info(
+          "System will retry connecting when database operations are needed"
+        );
+        return;
       }
     }
   }
