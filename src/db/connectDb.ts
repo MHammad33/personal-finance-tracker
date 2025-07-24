@@ -1,30 +1,69 @@
 import mongoose from "mongoose";
 import logger from "../utils/logger";
+import { getDbErrorMessage } from "../utils/dbErrorHandler";
+import { MongoError } from "mongodb";
 
-const connectDB = async (mongoUri?: string) => {
+const connectDB = async (mongoUri?: string): Promise<void> => {
   try {
-    const connection = await mongoose.connect(mongoUri || "", {
-      serverSelectionTimeoutMS: 5000
+    if (!mongoUri) {
+      throw new Error("MongoDB URI is required");
+    }
+
+    const connection = await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 15000
     });
+
     logger.info("Connected to Database", connection.connection.name);
   } catch (error) {
-    console.log("Error connecting to Database", error);
+    const errorMessage = getDbErrorMessage(error as MongoError);
+    throw new Error(errorMessage);
   }
 };
 
-export const connectDbWithRetry = async (uri: string, retries = 5) => {
-  while (retries) {
+export const connectDbWithRetry = async (uri: string): Promise<void> => {
+  let attempts = 0;
+  const maxAttempts = 5;
+
+  while (attempts < maxAttempts) {
     try {
       await connectDB(uri);
-      break;
+      return; // Successfully connected, exit function
     } catch (error) {
-      console.error(`Retrying... (${retries})`, error);
-      retries -= 1;
-      await new Promise(res => setTimeout(res, 5000));
+      attempts++;
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+
+      if (attempts < maxAttempts) {
+        logger.info(
+          `Database connection attempt ${attempts}/${maxAttempts} failed. Retrying in 3 seconds...`
+        );
+        await new Promise(res => setTimeout(res, 3000));
+      } else {
+        logger.error("DATABASE CONNECTION FAILED");
+
+        if (
+          errorMessage.includes("Network timeout") ||
+          errorMessage.includes("ETIMEOUT")
+        ) {
+          logger.error("Could not resolve the hostname");
+        } else if (errorMessage.includes("authentication failed")) {
+          logger.error("Authentication failed");
+          logger.error(
+            "Please check your username and password in the connection string"
+          );
+        } else {
+          logger.error(`📝 Error details: ${errorMessage}`);
+        }
+
+        logger.info("Server will continue without database connection");
+        logger.info(
+          "System will retry connecting when database operations are needed"
+        );
+        return;
+      }
     }
   }
-
-  if (!retries) process.exit(1);
 };
 
 export default connectDB;
