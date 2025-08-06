@@ -128,3 +128,8 @@ out
 .yarn/install-state.gz
 .pnp.*
 .vercel
+
+# Build
+dist/
+build/
+public/
